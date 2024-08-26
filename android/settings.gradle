@@ -1,0 +1,6 @@
+rootProject.name = 'appvisor_flutter_sdk'
+
+include ":androidSdk"
+
+project(':androidSdk').projectDir = file('androidSdk')
+

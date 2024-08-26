@@ -1,0 +1,235 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+// swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AppVisorSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+@_exported import AppVisorSDK
+import SystemConfiguration.CaptiveNetwork
+import Combine
+import CommonCrypto
+import Darwin
+import Foundation
+import OSLog
+import StoreKit
+import Swift
+import SwiftUI
+import SystemConfiguration
+import UIKit
+import UserNotifications
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+
+
+public protocol NetworkServiceProtocol {
+  func request<T>(_ url: Foundation.URL, method: AppVisorSDK.HTTPMethod, parameters: [Swift.String : Any]?, sessionConfiguration: Foundation.URLSessionConfiguration, cachePolicy: Foundation.URLRequest.CachePolicy, timeoutInterval: Foundation.TimeInterval, completion: @escaping (Swift.Result<T, any Swift.Error>) -> Swift.Void) where T : Swift.Decodable
+}
+public struct AVPAppUpdateResponse : Swift.Codable {
+  public let appVersion: Swift.String
+  public let storeUrl: Swift.String
+  public let updateOptionalFlg: Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@objc final public class AppvisorInAppMessaging : ObjectiveC.NSObject {
+  public init(networkService: any AppVisorSDK.NetworkServiceProtocol = NetworkService())
+  final public func fetchInAppMessage(with id: Swift.String? = "", completion: @escaping (Swift.Result<AppVisorSDK.InAppMessageResponse, any Swift.Error>) -> Swift.Void)
+  @_Concurrency.MainActor final public func showInAppMessage(with message: AppVisorSDK.InAppMessageResponse, and isVisible: SwiftUI.Binding<Swift.Bool>, and action: @escaping () -> Swift.Void) -> SwiftUI.AnyView
+  @objc deinit
+}
+public struct Environment {
+}
+public struct AVPConfigResponse : Swift.Decodable {
+  public let needsReview: Swift.Bool
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AVPPushStatusResponse : Swift.Codable {
+  public let message: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AppvisorAlertView : SwiftUI.View {
+  public init(isPresenting: SwiftUI.Binding<Swift.Bool>, notification: UserNotifications.UNNotification?, cancelHandler: @escaping () -> Swift.Void, openHandler: @escaping () -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s11AppVisorSDK17AppvisorAlertViewV4bodyQrvp", 0) __
+}
+@objc @_Concurrency.MainActor(unsafe) open class AppvisorCustomAlertView : UIKit.UIViewController, WebKit.WKNavigationDelegate {
+  @_Concurrency.MainActor(unsafe) public init(notification: UserNotifications.UNNotification, cancelAction: @escaping () -> Swift.Void, goAction: @escaping () -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc public func webView(_ webView: WebKit.WKWebView, decidePolicyFor navigationAction: WebKit.WKNavigationAction, decisionHandler: @escaping (WebKit.WKNavigationActionPolicy) -> Swift.Void)
+  @objc deinit
+}
+@objc(AVPNoticesResponse) public class AVPNoticesResponse : ObjectiveC.NSObject, Swift.Decodable {
+  @objc final public let data: [AppVisorSDK.AVPNotice]
+  @objc final public let lastKey: AppVisorSDK.AVPLastKey?
+  @objc final public let message: Swift.String
+  @objc public init(data: [AppVisorSDK.AVPNotice], lastKey: AppVisorSDK.AVPLastKey?, message: Swift.String)
+  @objc deinit
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc(AVPNotice) public class AVPNotice : ObjectiveC.NSObject, Swift.Codable {
+  @objc public var userUuid: Swift.String
+  @objc public var timestamp: Swift.Int
+  @objc public var messageId: Swift.Int
+  @objc public var pushTitle: Swift.String
+  @objc public var pushBody: Swift.String
+  @objc public var url: Swift.String
+  @objc public var readStatus: Swift.Bool
+  @objc public init(userUuid: Swift.String, timestamp: Swift.Int, messageId: Swift.Int, pushTitle: Swift.String, pushBody: Swift.String, url: Swift.String, readStatus: Swift.Bool)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc(AVPLastKey) public class AVPLastKey : ObjectiveC.NSObject, Swift.Decodable {
+  @objc final public let messageID: AppVisorSDK.DynamoDBAttributeValue
+  @objc final public let userUuid: AppVisorSDK.DynamoDBAttributeValue
+  @objc public init(messageID: AppVisorSDK.DynamoDBAttributeValue, userUuid: AppVisorSDK.DynamoDBAttributeValue)
+  @objc deinit
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@objc(DynamoDBAttributeValue) public class DynamoDBAttributeValue : ObjectiveC.NSObject, Swift.Decodable {
+  @objc final public let B: Foundation.Data?
+  @objc final public let BS: [Foundation.Data]?
+  @objc final public let L: [AppVisorSDK.DynamoDBAttributeValue]?
+  @objc final public let M: [Swift.String : AppVisorSDK.DynamoDBAttributeValue]?
+  @objc final public let N: Swift.String?
+  @objc final public let NS: [Swift.String]?
+  @objc final public let S: Swift.String?
+  @objc final public let SS: [Swift.String]?
+  @objc public var boolValue: Foundation.NSNumber? {
+    @objc get
+    @objc set
+  }
+  @objc public var isNull: Foundation.NSNumber? {
+    @objc get
+    @objc set
+  }
+  @objc public init(B: Foundation.Data?, boolValue: Foundation.NSNumber?, BS: [Foundation.Data]?, L: [AppVisorSDK.DynamoDBAttributeValue]?, M: [Swift.String : AppVisorSDK.DynamoDBAttributeValue]?, N: Swift.String?, NS: [Swift.String]?, isNull: Foundation.NSNumber?, S: Swift.String?, SS: [Swift.String]?)
+  @objc deinit
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class Appvisor : ObjectiveC.NSObject, WebKit.WKUIDelegate {
+  @objc public var appvisorUDID: Swift.String!
+  final public let inAppMessage: AppVisorSDK.AppvisorInAppMessaging!
+  final public let localPush: AppVisorSDK.AppvisorLocalPush!
+  @objc public static var sharedInstance: AppVisorSDK.Appvisor
+  @objc deinit
+}
+extension AppVisorSDK.Appvisor {
+  @objc dynamic public func enablePush(with appID: Swift.String, isDebug: Swift.Bool)
+  @objc dynamic public func trackPush(with launchOptions: [Swift.String : Any]?)
+  @objc dynamic public func registerToken(with data: Foundation.Data)
+  @objc dynamic public func registerUserData()
+  @objc dynamic public func canReceivePush() -> Swift.Bool
+  #if compiler(>=5.3) && $AsyncAwait
+  @objc dynamic public func isNotificationAuthorized() async -> Swift.Bool
+  #endif
+  @objc dynamic public func clearBadgeNumber()
+  @objc dynamic public func setPushStatus(_ active: Swift.Bool, completion: @escaping (Swift.Bool) -> Swift.Void)
+  @objc dynamic public func getUserProperty(forGroup propertyGroup: Swift.Int) -> Swift.String?
+  @objc dynamic public func setUserProperty(_ propertyValue: Swift.String?, forGroup propertyGroup: Swift.Int) -> Swift.Bool
+  @objc dynamic public func synchronizeUserProperties()
+  @objc dynamic public func getNotices(with messageID: Swift.String?, and userUUID: Swift.String?, completion: @escaping (AppVisorSDK.AVPNoticesResponse?) -> Swift.Void)
+  @objc dynamic public func setNoticeRead(with id: Swift.Int)
+  public func getCurrentConfig(completion: @escaping ([Swift.String : AppVisorSDK.JSONValue]?) -> Swift.Void)
+  @objc public static func appvisorUDID() -> Swift.String
+}
+extension AppVisorSDK.Appvisor {
+  @objc dynamic public func checkRichURL(from notification: UserNotifications.UNNotification?) -> Swift.Bool
+  @objc dynamic public func showMovieRichPush(_ notification: UserNotifications.UNNotification, in view: UIKit.UIView)
+  @objc dynamic public func showImage(from notification: UserNotifications.UNNotification, in view: UIKit.UIView)
+  @objc dynamic public func showWebSite(from notification: UserNotifications.UNNotification, in view: UIKit.UIView)
+  @objc dynamic public func showAlert(for notification: UserNotifications.UNNotification, with cancelAction: @escaping () -> Swift.Void, and goAction: @escaping () -> Swift.Void) -> AppVisorSDK.AppvisorCustomAlertView?
+  @objc dynamic public func handleContent(_ originalContent: UserNotifications.UNMutableNotificationContent, withHandler contentHandler: @escaping (UserNotifications.UNNotificationContent) -> Swift.Void)
+}
+extension AppVisorSDK.Appvisor {
+  public func checkForUpdate(from viewController: UIKit.UIViewController? = nil, useSDKDialog: Swift.Bool, onCancel: @escaping () -> Swift.Void, onUpdate: @escaping () -> Swift.Void, completion: @escaping (Swift.Result<AppVisorSDK.AVPAppUpdateResponse, any Swift.Error>) -> Swift.Void)
+}
+extension AppVisorSDK.Appvisor {
+  @objc public static func requestAppReview(completion: @escaping (AppVisorSDK.AVPNeedsReviewResponse?, (any Swift.Error)?) -> Swift.Void)
+}
+@objc @_hasMissingDesignatedInitializers final public class AppvisorLocalPush : ObjectiveC.NSObject, Foundation.ObservableObject {
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func scheduleNotification(with identifier: Swift.String, content: UserNotifications.UNMutableNotificationContent, timeInterval: Foundation.TimeInterval, repeats: Swift.Bool) async
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func scheduleNotification(with actions: [UserNotifications.UNNotificationAction], identifier: Swift.String, content: UserNotifications.UNMutableNotificationContent, timeInterval: Foundation.TimeInterval, repeats: Swift.Bool) async
+  #endif
+  @objc final public func scheduleNotification(with identifier: Swift.String, content: UserNotifications.UNMutableNotificationContent, timeInterval: Foundation.TimeInterval, repeats: Swift.Bool)
+  @objc final public func scheduleNotification(with actions: [UserNotifications.UNNotificationAction], identifier: Swift.String, content: UserNotifications.UNMutableNotificationContent, timeInterval: Foundation.TimeInterval, repeats: Swift.Bool)
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func scheduleWeeklyNotification(with date: Foundation.DateComponents, content: UserNotifications.UNMutableNotificationContent, identifier: Swift.String, repeats: Swift.Bool) async
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func scheduleWeeklyNotification(with actions: [UserNotifications.UNNotificationAction], identifier: Swift.String, date: Foundation.DateComponents, content: UserNotifications.UNMutableNotificationContent, repeats: Swift.Bool) async
+  #endif
+  @objc final public func scheduleWeeklyNotification(with date: Foundation.DateComponents, content: UserNotifications.UNMutableNotificationContent, identifier: Swift.String, repeats: Swift.Bool)
+  @objc final public func scheduleWeeklyNotification(with actions: [UserNotifications.UNNotificationAction], identifier: Swift.String, date: Foundation.DateComponents, content: UserNotifications.UNMutableNotificationContent, repeats: Swift.Bool)
+  final public func cancelLocalNotifications(with identifiers: [Swift.String])
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class Log {
+  public static func debug(_ message: Swift.String?)
+  public static func info(_ message: Swift.String?)
+  public static func `default`(_ message: Swift.String?)
+  public static func error(_ message: Swift.String?)
+  public static func fault(_ message: Swift.String?)
+  @objc deinit
+}
+
+@objc(AVPNeedsReviewResponse) public class AVPNeedsReviewResponse : ObjectiveC.NSObject, Swift.Decodable {
+  @objc final public let needReview: Swift.Bool
+  @objc public init(needReview: Swift.Bool)
+  @objc deinit
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public struct AVPPropertyResponse : Swift.Codable {
+  public let property: [AppVisorSDK.AVPPropertyData]
+  public let message: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AVPPropertyData : Swift.Codable {
+  public let id: Swift.Int
+  public let applicationId: Swift.Int
+  public let value: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum JSONValue : Swift.Decodable {
+  case string(Swift.String)
+  case int(Swift.Int)
+  case double(Swift.Double)
+  case bool(Swift.Bool)
+  case array([AppVisorSDK.JSONValue])
+  case object([Swift.String : AppVisorSDK.JSONValue])
+  case null
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct InAppMessageResponse : Swift.Decodable {
+  public init(from decoder: any Swift.Decoder) throws
+}
+public class NetworkService : AppVisorSDK.NetworkServiceProtocol {
+  public init()
+  public func request<T>(_ url: Foundation.URL, method: AppVisorSDK.HTTPMethod, parameters: [Swift.String : Any]? = nil, sessionConfiguration: Foundation.URLSessionConfiguration = .default, cachePolicy: Foundation.URLRequest.CachePolicy = .useProtocolCachePolicy, timeoutInterval: Foundation.TimeInterval = 60.0, completion: @escaping (Swift.Result<T, any Swift.Error>) -> Swift.Void) where T : Swift.Decodable
+  @objc deinit
+}
+public enum HTTPMethod : Swift.String {
+  case get
+  case post
+  case patch
+  case delete
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension AppVisorSDK.Appvisor : UserNotifications.UNUserNotificationCenterDelegate {}
+extension AppVisorSDK.HTTPMethod : Swift.Equatable {}
+extension AppVisorSDK.HTTPMethod : Swift.Hashable {}
+extension AppVisorSDK.HTTPMethod : Swift.RawRepresentable {}
