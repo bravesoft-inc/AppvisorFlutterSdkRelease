@@ -1,0 +1,27 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <application>
+        <service
+            android:name="biz.appvisor.android.sdk.AppvisorFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="biz.appvisor.android.sdk.richpush.RichPushDialogActivity"
+            android:exported="false"
+            android:showOnLockScreen="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <service
+            android:name="biz.appvisor.android.sdk.richpush.RichPushIntentService"
+            android:exported="false" />
+
+        <service
+            android:name="biz.appvisor.android.sdk.richpush.RichPushJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+    </application>
+</manifest>
