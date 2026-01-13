@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'appvisor_flutter_sdk'
-  s.version          = '1.3.0'
+  s.version          = '1.3.2'
   s.summary          = 'A push notification plugin for Flutter.'
   s.description      = <<-DESC
 A push notification plugin for Flutter.

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
 // swift-module-flags: -target x86_64-apple-ios14-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name AppVisorSDK
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
 @_exported import AppVisorSDK
 import SystemConfiguration.CaptiveNetwork
 import Combine
@@ -49,13 +49,14 @@ public struct AVPPushStatusResponse : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @_Concurrency.MainActor @preconcurrency public struct AppvisorAlertView : SwiftUICore.View {
-  @_Concurrency.MainActor @preconcurrency public init(isPresenting: SwiftUICore.Binding<Swift.Bool>, notification: UserNotifications.UNNotification?, cancelHandler: @escaping () -> Swift.Void, openHandler: @escaping () -> Swift.Void)
+  @_Concurrency.MainActor @preconcurrency public init(isPresenting: SwiftUICore.Binding<Swift.Bool>, notification: UserNotifications.UNNotification?, customSize: CoreFoundation.CGSize? = nil, cancelHandler: @escaping () -> Swift.Void, openHandler: @escaping () -> Swift.Void)
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
   public typealias Body = @_opaqueReturnTypeOf("$s11AppVisorSDK17AppvisorAlertViewV4bodyQrvp", 0) __
 }
 @objc @_Concurrency.MainActor @preconcurrency open class AppvisorCustomAlertView : UIKit.UIViewController, WebKit.WKNavigationDelegate {
+  @_Concurrency.MainActor @preconcurrency public var dialogSize: CoreFoundation.CGSize?
   @_Concurrency.MainActor @preconcurrency public init(notification: UserNotifications.UNNotification, cancelAction: @escaping () -> Swift.Void, goAction: @escaping () -> Swift.Void)
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
@@ -151,10 +152,12 @@ extension AppVisorSDK.Appvisor {
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func showImage(from notification: UserNotifications.UNNotification, in view: UIKit.UIView)
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func showWebSite(from notification: UserNotifications.UNNotification, in view: UIKit.UIView)
   @objc @_Concurrency.MainActor @preconcurrency dynamic public func showAlert(for notification: UserNotifications.UNNotification, with cancelAction: @escaping () -> Swift.Void, and goAction: @escaping () -> Swift.Void) -> AppVisorSDK.AppvisorCustomAlertView?
+  @_Concurrency.MainActor @preconcurrency public func showAlert(for notification: UserNotifications.UNNotification, customSize: CoreFoundation.CGSize?, with cancelAction: @escaping () -> Swift.Void, and goAction: @escaping () -> Swift.Void) -> AppVisorSDK.AppvisorCustomAlertView?
+  @objc @_Concurrency.MainActor @preconcurrency dynamic public func showAlert(for notification: UserNotifications.UNNotification, customWidth: CoreFoundation.CGFloat, customHeight: CoreFoundation.CGFloat, with cancelAction: @escaping () -> Swift.Void, and goAction: @escaping () -> Swift.Void) -> AppVisorSDK.AppvisorCustomAlertView?
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func handleContent(_ originalContent: UserNotifications.UNMutableNotificationContent, withHandler contentHandler: @escaping (UserNotifications.UNNotificationContent) -> Swift.Void)
 }
 extension AppVisorSDK.Appvisor {
-  @_Concurrency.MainActor @preconcurrency public func checkForUpdate(from viewController: UIKit.UIViewController? = nil, useSDKDialog: Swift.Bool, onCancel: @escaping () -> Swift.Void, onUpdate: @escaping () -> Swift.Void, completion: @escaping (Swift.Result<AppVisorSDK.AVPAppUpdateResponse, any Swift.Error>) -> Swift.Void)
+  @_Concurrency.MainActor @preconcurrency public func checkForUpdate(from viewController: UIKit.UIViewController? = nil, useSDKDialog: Swift.Bool, onCancel: @escaping () -> Swift.Void, onUpdate: @escaping () -> Swift.Void, completion: @escaping (Swift.Result<AppVisorSDK.AVPAppUpdateResponse?, any Swift.Error>) -> Swift.Void)
 }
 extension AppVisorSDK.Appvisor {
   @objc @_Concurrency.MainActor @preconcurrency public static func requestAppReview(completion: @escaping (AppVisorSDK.AVPNeedsReviewResponse?, (any Swift.Error)?) -> Swift.Void)

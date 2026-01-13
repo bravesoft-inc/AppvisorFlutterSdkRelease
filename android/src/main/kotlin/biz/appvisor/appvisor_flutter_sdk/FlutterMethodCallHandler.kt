@@ -107,13 +107,19 @@ class FlutterMethodCallHandler : MethodCallHandler {
 
             val avConfigs = AppvisorConfigurations(
                 appKey = appKey,
+                defaultTitle = configs.defaultTitle,
                 smallIcon = smallIconId,
+                callbackClass = activity.javaClass,
                 largeIcon = largeIconId,
+                smallIconColor = null,
+                debuggable = debuggable,
+                preferHms = false,
+                enableFcm = true,
+                enableHms = false,
                 notificationChannelName = configs.channelName,
                 notificationChannelDescription = configs.channelDescription,
-                defaultTitle = configs.defaultTitle ?: "",
-                debuggable = debuggable,
-                callbackClass = activity.javaClass,
+                richPushDialogWidth = configs.richPushDialogWidth,
+                richPushDialogHeight = configs.richPushDialogHeight,
             )
 
             appvisor.init(avConfigs)

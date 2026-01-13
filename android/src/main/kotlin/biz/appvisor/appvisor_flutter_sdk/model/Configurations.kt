@@ -7,7 +7,9 @@ data class Configurations(
     val channelDescription: String,
     val smallIconName: String,
     val largeIconName: String?,
-    val defaultTitle: String?
+    val defaultTitle: String,
+    val richPushDialogWidth: Int?,
+    val richPushDialogHeight: Int?
 ) {
     internal fun toMap(): Map<String, String?> {
         return mapOf(
@@ -15,7 +17,9 @@ data class Configurations(
             "channelDescription" to channelDescription,
             "smallIconName" to smallIconName,
             "largeIconName" to largeIconName,
-            "defaultTitle" to defaultTitle
+            "defaultTitle" to defaultTitle,
+            "richPushDialogWidth" to richPushDialogWidth?.toString(),
+            "richPushDialogHeight" to richPushDialogHeight?.toString(),
         )
     }
 
@@ -35,14 +39,21 @@ data class Configurations(
                 throwError("smallIconName")
             }
             val largeIconName = map["largeIconName"] as? String
-            val title = map["defaultTitle"] as? String
+            val defaultTitle = map["defaultTitle"] as? String
+            if (defaultTitle.isNullOrBlank()) {
+                throwError("defaultTitle")
+            }
+            val richPushDialogWidth = (map["richPushDialogWidth"] as? String)?.toIntOrNull()
+            val richPushDialogHeight = (map["richPushDialogHeight"] as? String)?.toIntOrNull()
 
             return Configurations(
                 channelName = channelName,
                 channelDescription = channelDescription,
                 smallIconName = smallIconName,
                 largeIconName = largeIconName,
-                defaultTitle = title
+                defaultTitle = defaultTitle,
+                richPushDialogWidth = richPushDialogWidth,
+                richPushDialogHeight = richPushDialogHeight
             )
         }
         private fun throwError(key: String): Nothing = throw IllegalArgumentException(missingArg(key))

@@ -45,8 +45,12 @@ abstract class AppvisorFlutterSdkPlatform extends PlatformInterface {
   }
 
   Future<Result<Null>> configure(
-      String channelName, String channelDescription, String smallIconName,
-      [String? largeIconName, String? defaultTitle]) {
+      String channelName,
+      String channelDescription,
+      String smallIconName,
+      String? largeIconName,
+      String defaultTitle,
+      [int? richPushDialogWidth, int? richPushDialogHeight]) {
     throw UnimplementedError('setupNotification() has not been implemented.');
   }
 

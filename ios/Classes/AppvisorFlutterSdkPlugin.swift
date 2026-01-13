@@ -242,7 +242,12 @@ public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin {
             switch avresult {
             case .success(let response):
                 log(tag, "Check for update succeeded: \(String(describing: response))")
-                result(response.toMap())
+                if let response = response {
+                    result(response.toMap())
+                } else {
+                    result(nil)
+                }
+
             case .failure(let error):
                 log(tag, "Check for update failed: \(error.localizedDescription)")
                 result(FlutterError(
@@ -353,7 +358,55 @@ public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin {
 
         avp.trackPush(with: trackingInfo)
 
+        if avp.checkRichURL(from: notification) {
+            let category = notification.request.content.categoryIdentifier
+            if category == "AppvisorRichPushCategory" {
+                log(tag, "Showing rich push dialog for Web type notification")
+                showRichPushDialog(for: notification)
+            }
+        }
+
         completionHandler()
+    }
+
+    private func showRichPushDialog(for notification: UNNotification) {
+        guard let rootViewController = getRootViewController() else {
+            log(tag, "Failed to get root view controller")
+            return
+        }
+
+        var topViewController = rootViewController
+        while let presentedViewController = topViewController.presentedViewController {
+            topViewController = presentedViewController
+        }
+
+        let alertView = avp.showAlert(for: notification, with: {
+            log(tag, "Rich push dialog cancelled")
+        }, and: {
+            log(tag, "Rich push dialog - opening web page")
+            guard let urlString = notification.request.content.userInfo["media-url"] as? String,
+                  let url = URL(string: urlString) else {
+                log(tag, "Failed to get media URL from notification")
+                return
+            }
+
+            DispatchQueue.main.async {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        })
+
+        if let alertView = alertView {
+            DispatchQueue.main.async {
+                topViewController.present(alertView, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func getRootViewController() -> UIViewController? {
+        let windowScene = UIApplication.shared.connectedScenes
+            .first { $0.activationState == .foregroundActive || $0.activationState == .foregroundInactive } as? UIWindowScene
+
+        return windowScene?.windows.first(where: { $0.isKeyWindow })?.rootViewController
     }
 
     public func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

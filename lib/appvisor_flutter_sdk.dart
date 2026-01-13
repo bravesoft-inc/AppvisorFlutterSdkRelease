@@ -47,23 +47,33 @@ class AppvisorFlutterSdk {
     return platform.init(appKey, enableLogs);
   }
 
-  /// Sets up the notification channel for the push notification service.
+  /// Sets up options for push notifications (Android).
   ///
-  /// The [channelName] parameter specifies the name of the notification channel.
-  /// The [channelDescription] parameter specifies the description of the notification channel.
-  /// The [smallIconName] parameter specifies the name of the small icon to be used for the notification.
-  /// The [largeIconName] parameter specifies the name of the large icon to be used for the notification (optional).
-  /// The [defaultTitle] parameter specifies the default title for the notification (optional).
+  /// - [channelName]: Notification channel name (required).
+  /// - [channelDescription]: Notification channel description (required).
+  /// - [smallIconName]: Drawable resource name for the small icon, without extension (required).
+  /// - [largeIconName]: Drawable resource name for the large icon, without extension (optional).
+  /// - [defaultTitle]: Default notification title (required).
+  /// - [richPushDialogWidth]: Rich push dialog width in px (optional).
+  /// - [richPushDialogHeight]: Rich push dialog height in px (optional).
   ///
-  /// Returns a [Future] that completes with a [Result] object containing a [Null] value.
+  /// Returns a [Future] with a [Result] containing [Null] on success.
   Future<Result<Null>> configure(
       {required String channelName,
       required String channelDescription,
       required String smallIconName,
       String? largeIconName,
-      String? defaultTitle}) {
-    return platform.configure(channelName, channelDescription, smallIconName,
-        largeIconName, defaultTitle);
+      required String defaultTitle,
+      int? richPushDialogWidth,
+      int? richPushDialogHeight}) {
+    return platform.configure(
+        channelName,
+        channelDescription,
+        smallIconName,
+        largeIconName,
+        defaultTitle,
+        richPushDialogWidth,
+        richPushDialogHeight);
   }
 
   @visibleForTesting

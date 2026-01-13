@@ -1116,7 +1116,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(isPresenting:notification:cancelHandler:openHandler:)",
+            "printedName": "init(isPresenting:notification:customSize:cancelHandler:openHandler:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -1150,6 +1150,21 @@
                     "usr": "c:objc(cs)UNNotification"
                   }
                 ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "CoreFoundation.CGSize?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGSize",
+                    "printedName": "CoreFoundation.CGSize",
+                    "usr": "c:@S@CGSize"
+                  }
+                ],
+                "hasDefaultArg": true,
                 "usr": "s:Sq"
               },
               {
@@ -1188,8 +1203,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:11AppVisorSDK17AppvisorAlertViewV12isPresenting12notification13cancelHandler04openK0AC7SwiftUI7BindingVySbG_So14UNNotificationCSgyycyyctcfc",
-            "mangledName": "$s11AppVisorSDK17AppvisorAlertViewV12isPresenting12notification13cancelHandler04openK0AC7SwiftUI7BindingVySbG_So14UNNotificationCSgyycyyctcfc",
+            "usr": "s:11AppVisorSDK17AppvisorAlertViewV12isPresenting12notification10customSize13cancelHandler04openM0AC7SwiftUI7BindingVySbG_So14UNNotificationCSgSo6CGSizeVSgyycyyctcfc",
+            "mangledName": "$s11AppVisorSDK17AppvisorAlertViewV12isPresenting12notification10customSize13cancelHandler04openM0AC7SwiftUI7BindingVySbG_So14UNNotificationCSgSo6CGSizeVSgyycyyctcfc",
             "moduleName": "AppVisorSDK",
             "declAttributes": [
               "Preconcurrency",
@@ -1346,6 +1361,118 @@
         "name": "AppvisorCustomAlertView",
         "printedName": "AppvisorCustomAlertView",
         "children": [
+          {
+            "kind": "Var",
+            "name": "dialogSize",
+            "printedName": "dialogSize",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "CoreFoundation.CGSize?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGSize",
+                    "printedName": "CoreFoundation.CGSize",
+                    "usr": "c:@S@CGSize"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11AppVisorSDK23AppvisorCustomAlertViewC10dialogSizeSo6CGSizeVSgvp",
+            "mangledName": "$s11AppVisorSDK23AppvisorCustomAlertViewC10dialogSizeSo6CGSizeVSgvp",
+            "moduleName": "AppVisorSDK",
+            "declAttributes": [
+              "HasInitialValue",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "CoreFoundation.CGSize?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGSize",
+                        "printedName": "CoreFoundation.CGSize",
+                        "usr": "c:@S@CGSize"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11AppVisorSDK23AppvisorCustomAlertViewC10dialogSizeSo6CGSizeVSgvg",
+                "mangledName": "$s11AppVisorSDK23AppvisorCustomAlertViewC10dialogSizeSo6CGSizeVSgvg",
+                "moduleName": "AppVisorSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "CoreFoundation.CGSize?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGSize",
+                        "printedName": "CoreFoundation.CGSize",
+                        "usr": "c:@S@CGSize"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11AppVisorSDK23AppvisorCustomAlertViewC10dialogSizeSo6CGSizeVSgvs",
+                "mangledName": "$s11AppVisorSDK23AppvisorCustomAlertViewC10dialogSizeSo6CGSizeVSgvs",
+                "moduleName": "AppVisorSDK",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11AppVisorSDK23AppvisorCustomAlertViewC10dialogSizeSo6CGSizeVSgvM",
+                "mangledName": "$s11AppVisorSDK23AppvisorCustomAlertViewC10dialogSizeSo6CGSizeVSgvM",
+                "moduleName": "AppVisorSDK",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
           {
             "kind": "Constructor",
             "name": "init",
@@ -6656,6 +6783,181 @@
           },
           {
             "kind": "Function",
+            "name": "showAlert",
+            "printedName": "showAlert(for:customSize:with:and:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "AppVisorSDK.AppvisorCustomAlertView?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AppvisorCustomAlertView",
+                    "printedName": "AppVisorSDK.AppvisorCustomAlertView",
+                    "usr": "c:@M@AppVisorSDK@objc(cs)AppvisorCustomAlertView"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UNNotification",
+                "printedName": "UserNotifications.UNNotification",
+                "usr": "c:objc(cs)UNNotification"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "CoreFoundation.CGSize?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGSize",
+                    "printedName": "CoreFoundation.CGSize",
+                    "usr": "c:@S@CGSize"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11AppVisorSDK8AppvisorC9showAlert3for10customSize4with3andAA0d6CustomF4ViewCSgSo14UNNotificationC_So6CGSizeVSgyycyyctF",
+            "mangledName": "$s11AppVisorSDK8AppvisorC9showAlert3for10customSize4with3andAA0d6CustomF4ViewCSgSo14UNNotificationC_So6CGSizeVSgyycyyctF",
+            "moduleName": "AppVisorSDK",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "showAlert",
+            "printedName": "showAlert(for:customWidth:customHeight:with:and:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "AppVisorSDK.AppvisorCustomAlertView?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AppvisorCustomAlertView",
+                    "printedName": "AppVisorSDK.AppvisorCustomAlertView",
+                    "usr": "c:@M@AppVisorSDK@objc(cs)AppvisorCustomAlertView"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UNNotification",
+                "printedName": "UserNotifications.UNNotification",
+                "usr": "c:objc(cs)UNNotification"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@AppVisorSDK@objc(cs)Appvisor(im)showAlertFor:customWidth:customHeight:with:and:",
+            "mangledName": "$s11AppVisorSDK8AppvisorC9showAlert3for11customWidth0H6Height4with3andAA0d6CustomF4ViewCSgSo14UNNotificationC_12CoreGraphics7CGFloatVAQyycyyctF",
+            "moduleName": "AppVisorSDK",
+            "objc_name": "showAlertFor:customWidth:customHeight:with:and:",
+            "declAttributes": [
+              "Dynamic",
+              "Preconcurrency",
+              "Custom",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "handleContent",
             "printedName": "handleContent(_:withHandler:)",
             "children": [
@@ -6773,7 +7075,7 @@
               {
                 "kind": "TypeFunc",
                 "name": "Function",
-                "printedName": "(Swift.Result<AppVisorSDK.AVPAppUpdateResponse, any Swift.Error>) -> ()",
+                "printedName": "(Swift.Result<AppVisorSDK.AVPAppUpdateResponse?, any Swift.Error>) -> ()",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -6783,13 +7085,21 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Result",
-                    "printedName": "Swift.Result<AppVisorSDK.AVPAppUpdateResponse, any Swift.Error>",
+                    "printedName": "Swift.Result<AppVisorSDK.AVPAppUpdateResponse?, any Swift.Error>",
                     "children": [
                       {
                         "kind": "TypeNominal",
-                        "name": "AVPAppUpdateResponse",
-                        "printedName": "AppVisorSDK.AVPAppUpdateResponse",
-                        "usr": "s:11AppVisorSDK20AVPAppUpdateResponseV"
+                        "name": "Optional",
+                        "printedName": "AppVisorSDK.AVPAppUpdateResponse?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "AVPAppUpdateResponse",
+                            "printedName": "AppVisorSDK.AVPAppUpdateResponse",
+                            "usr": "s:11AppVisorSDK20AVPAppUpdateResponseV"
+                          }
+                        ],
+                        "usr": "s:Sq"
                       },
                       {
                         "kind": "TypeNominal",
@@ -6804,8 +7114,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:11AppVisorSDK8AppvisorC14checkForUpdate4from12useSDKDialog8onCancel0kG010completionySo16UIViewControllerCSg_Sbyycyycys6ResultOyAA06AVPAppG8ResponseVs5Error_pGctF",
-            "mangledName": "$s11AppVisorSDK8AppvisorC14checkForUpdate4from12useSDKDialog8onCancel0kG010completionySo16UIViewControllerCSg_Sbyycyycys6ResultOyAA06AVPAppG8ResponseVs5Error_pGctF",
+            "usr": "s:11AppVisorSDK8AppvisorC14checkForUpdate4from12useSDKDialog8onCancel0kG010completionySo16UIViewControllerCSg_Sbyycyycys6ResultOyAA06AVPAppG8ResponseVSgs5Error_pGctF",
+            "mangledName": "$s11AppVisorSDK8AppvisorC14checkForUpdate4from12useSDKDialog8onCancel0kG010completionySo16UIViewControllerCSg_Sbyycyycys6ResultOyAA06AVPAppG8ResponseVSgs5Error_pGctF",
             "moduleName": "AppVisorSDK",
             "declAttributes": [
               "Preconcurrency",
@@ -10734,79 +11044,114 @@
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
       "kind": "BooleanLiteral",
-      "offset": 568,
+      "offset": 603,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
       "kind": "BooleanLiteral",
-      "offset": 845,
+      "offset": 816,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1107,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "StringLiteral",
+      "offset": 1137,
+      "length": 11,
+      "value": "\"閉じる\""
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
       "kind": "IntegerLiteral",
-      "offset": 917,
+      "offset": 1319,
+      "length": 2,
+      "value": "17"
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1473,
       "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1164,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
-      "kind": "StringLiteral",
-      "offset": 1194,
-      "length": 8,
-      "value": "\"Cancel\""
-    },
-    {
-      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
-      "kind": "FloatLiteral",
-      "offset": 1438,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1627,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
-      "kind": "StringLiteral",
-      "offset": 1657,
-      "length": 12,
-      "value": "\"Go to Page\""
-    },
-    {
-      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
-      "kind": "FloatLiteral",
-      "offset": 1869,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2106,
-      "length": 5,
-      "value": "false"
+      "value": "8"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
       "kind": "IntegerLiteral",
-      "offset": 2186,
+      "offset": 1482,
       "length": 1,
       "value": "0"
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1493,
+      "length": 1,
+      "value": "8"
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1503,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1691,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "StringLiteral",
+      "offset": 1721,
+      "length": 8,
+      "value": "\"表示\""
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1902,
+      "length": 2,
+      "value": "17"
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "FloatLiteral",
+      "offset": 2092,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2132,
+      "length": 2,
+      "value": "12"
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2368,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2476,
+      "length": 1,
+      "value": "8"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Utils\/AppvisorUtil.swift",
@@ -10881,7 +11226,7 @@
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/Core\/Appvisor.swift",
       "kind": "BooleanLiteral",
-      "offset": 18716,
+      "offset": 18885,
       "length": 5,
       "value": "false"
     },
@@ -10945,405 +11290,405 @@
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
       "offset": 159,
-      "length": 7,
-      "value": "\"2.1.4\""
+      "length": 9,
+      "value": "\"2.1.4.3\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 194,
+      "offset": 196,
       "length": 20,
       "value": "\"appvisorpushstatus\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 241,
+      "offset": 243,
       "length": 19,
       "value": "\"appvisorpushtoken\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 289,
+      "offset": 291,
       "length": 18,
       "value": "\"appvisorpushtext\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 337,
+      "offset": 339,
       "length": 19,
       "value": "\"appvisorpushbadge\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 386,
+      "offset": 388,
       "length": 19,
       "value": "\"appvisorpushsound\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 425,
-      "length": 13,
-      "value": "\"appvisoropt\""
+      "offset": 427,
+      "length": 16,
+      "value": "\"appvisoroptout\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 470,
+      "offset": 475,
       "length": 24,
       "value": "\"appvisoroptreactivated\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 519,
+      "offset": 524,
       "length": 18,
       "value": "\"appvisorproperty\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 562,
+      "offset": 567,
       "length": 27,
       "value": "\":\/\/prod-api.app-visor.com\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 616,
+      "offset": 621,
       "length": 24,
       "value": "\"appvisorpushAuthorized\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 667,
+      "offset": 672,
       "length": 24,
       "value": "\"appvisorpushRegistered\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 715,
+      "offset": 720,
       "length": 21,
       "value": "\"appvisorpushGranted\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 761,
+      "offset": 766,
       "length": 7,
       "value": "\"{[s]}\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 796,
+      "offset": 801,
       "length": 35,
       "value": "\"Nj5mCb\\zNlc}7)h5hP6a\\7TaC0{@SY+\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 873,
+      "offset": 878,
       "length": 4,
       "value": "12.0"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 905,
+      "offset": 910,
       "length": 4,
       "value": "\"id\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 944,
+      "offset": 949,
       "length": 16,
       "value": "\"propertyIDList\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 982,
+      "offset": 987,
       "length": 8,
       "value": "\"appKey\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1013,
+      "offset": 1018,
       "length": 4,
       "value": "\"id\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1042,
+      "offset": 1047,
       "length": 12,
       "value": "\"deviceUUID\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1080,
+      "offset": 1085,
       "length": 13,
       "value": "\"deviceToken\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1118,
+      "offset": 1123,
       "length": 12,
       "value": "\"appVersion\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1158,
+      "offset": 1163,
       "length": 15,
       "value": "\"localeCountry\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1202,
+      "offset": 1207,
       "length": 16,
       "value": "\"localeLanguage\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1243,
+      "offset": 1248,
       "length": 12,
       "value": "\"sdkVersion\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1276,
+      "offset": 1281,
       "length": 8,
       "value": "\"osType\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1309,
+      "offset": 1314,
       "length": 12,
       "value": "\"deviceType\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1347,
+      "offset": 1352,
       "length": 13,
       "value": "\"deviceModel\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1384,
+      "offset": 1389,
       "length": 11,
       "value": "\"OSVersion\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1416,
+      "offset": 1421,
       "length": 8,
       "value": "\"pushID\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1448,
+      "offset": 1453,
       "length": 11,
       "value": "\"messageID\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1484,
+      "offset": 1489,
       "length": 12,
       "value": "\"pushStatus\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1518,
+      "offset": 1523,
       "length": 9,
       "value": "\"envType\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1549,
+      "offset": 1554,
       "length": 9,
       "value": "\"lastKey\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1584,
+      "offset": 1589,
       "length": 13,
       "value": "\"arrivedTime\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1623,
+      "offset": 1628,
       "length": 12,
       "value": "\"isTokenReg\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1664,
+      "offset": 1669,
       "length": 15,
       "value": "\"server_status\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1704,
+      "offset": 1709,
       "length": 13,
       "value": "\"push_status\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1742,
+      "offset": 1747,
       "length": 4,
       "value": "\"pp\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1775,
+      "offset": 1780,
       "length": 5,
       "value": "\"ofs\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1808,
+      "offset": 1813,
       "length": 5,
       "value": "\"cnt\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1837,
+      "offset": 1842,
       "length": 4,
       "value": "\"dt\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1869,
+      "offset": 1874,
       "length": 4,
       "value": "\"OK\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1900,
+      "offset": 1905,
       "length": 4,
       "value": "\"NG\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1930,
+      "offset": 1935,
       "length": 4,
       "value": "\"KL\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1995,
+      "offset": 2000,
       "length": 16,
       "value": "\"\/v1\/sdk\/regist\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2040,
+      "offset": 2045,
       "length": 18,
       "value": "\"\/v1\/sdk\/callback\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2089,
+      "offset": 2094,
       "length": 26,
       "value": "\"\/v1\/sdk\/changePushStatus\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2143,
+      "offset": 2148,
       "length": 27,
       "value": "\"\/v1\/sdk\/changeDeviceToken\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2208,
+      "offset": 2213,
       "length": 22,
       "value": "\"\/v1\/sdk\/setParameter\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2263,
+      "offset": 2268,
       "length": 22,
       "value": "\"\/v1\/sdk\/forcedUpdate\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2318,
+      "offset": 2323,
       "length": 21,
       "value": "\"\/v1\/sdk\/storeReview\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2366,
+      "offset": 2371,
       "length": 20,
       "value": "\"\/v1\/sdk\/getNotices\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2418,
+      "offset": 2423,
       "length": 23,
       "value": "\"\/v1\/sdk\/setNoticeRead\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2468,
+      "offset": 2473,
       "length": 19,
       "value": "\"\/v1\/sdk\/getConfig\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2524,
+      "offset": 2529,
       "length": 25,
       "value": "\"\/v1\/sdk\/getInAppMessage\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2588,
+      "offset": 2593,
       "length": 22,
       "value": "\"\/v1\/sdk\/forcedUpdate\""
     },

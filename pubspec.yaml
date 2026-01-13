@@ -1,6 +1,6 @@
 name: appvisor_flutter_sdk
 description: "A push notification plugin for Flutter."
-version: 1.3.0
+version: 1.3.2
 homepage:
 
 environment:

@@ -56,8 +56,12 @@ class AppvisorFlutterSdkImpl extends AppvisorFlutterSdkPlatform {
 
   @override
   Future<Result<Null>> configure(
-      String channelName, String channelDescription, String smallIconName,
-      [String? largeIconName, String? defaultTitle]) async {
+      String channelName,
+      String channelDescription,
+      String smallIconName,
+      String? largeIconName,
+      String defaultTitle,
+      [int? richPushDialogWidth, int? richPushDialogHeight]) async {
     try {
       await _methodChannel
           .invokeMethod<void>(PlatformMethod.Configure.name, <String, dynamic>{
@@ -66,7 +70,10 @@ class AppvisorFlutterSdkImpl extends AppvisorFlutterSdkPlatform {
           'channelDescription': channelDescription,
           'smallIconName': smallIconName,
           'largeIconName': largeIconName,
-          'defaultTitle': defaultTitle
+          'defaultTitle': defaultTitle,
+          // Kotlin側で Map<String, String> として受け取っているため文字列化する
+          'richPushDialogWidth': richPushDialogWidth?.toString(),
+          'richPushDialogHeight': richPushDialogHeight?.toString(),
         }
       });
       return Result.success(null);
