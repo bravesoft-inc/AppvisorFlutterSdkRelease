@@ -748,44 +748,6 @@
       },
       {
         "kind": "TypeDecl",
-        "name": "Environment",
-        "printedName": "Environment",
-        "declKind": "Struct",
-        "usr": "s:11AppVisorSDK11EnvironmentV",
-        "mangledName": "$s11AppVisorSDK11EnvironmentV",
-        "moduleName": "AppVisorSDK",
-        "declAttributes": [
-          "AccessControl"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Copyable",
-            "printedName": "Copyable",
-            "usr": "s:s8CopyableP",
-            "mangledName": "$ss8CopyableP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Escapable",
-            "printedName": "Escapable",
-            "usr": "s:s9EscapableP",
-            "mangledName": "$ss9EscapableP"
-          }
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "AppVisorSDK",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "TypeDecl",
         "name": "AVPConfigResponse",
         "printedName": "AVPConfigResponse",
         "children": [
@@ -1827,6 +1789,13 @@
         "kind": "Import",
         "name": "CommonCrypto",
         "printedName": "CommonCrypto",
+        "declKind": "Import",
+        "moduleName": "AppVisorSDK"
+      },
+      {
+        "kind": "Import",
+        "name": "CryptoKit",
+        "printedName": "CryptoKit",
         "declKind": "Import",
         "moduleName": "AppVisorSDK"
       },
@@ -5921,6 +5890,61 @@
             "mangledName": "$s11AppVisorSDK8AppvisorC9trackPush4withySDySSypGSg_tF",
             "moduleName": "AppVisorSDK",
             "objc_name": "trackPushWith:",
+            "declAttributes": [
+              "Dynamic",
+              "Preconcurrency",
+              "Custom",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "trackSilentPush",
+            "printedName": "trackSilentPush(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIBackgroundFetchResult",
+                "printedName": "UIKit.UIBackgroundFetchResult",
+                "usr": "c:@E@UIBackgroundFetchResult"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.AnyHashable : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.AnyHashable : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AnyHashable",
+                        "printedName": "Swift.AnyHashable",
+                        "usr": "s:s11AnyHashableV"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@AppVisorSDK@objc(cs)Appvisor(im)trackSilentPushWith:",
+            "mangledName": "$s11AppVisorSDK8AppvisorC15trackSilentPush4withSo23UIBackgroundFetchResultVSDys11AnyHashableVypGSg_tF",
+            "moduleName": "AppVisorSDK",
+            "objc_name": "trackSilentPushWith:",
             "declAttributes": [
               "Dynamic",
               "Preconcurrency",
@@ -10960,63 +10984,63 @@
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorWebView.swift",
       "kind": "BooleanLiteral",
-      "offset": 1951,
+      "offset": 2033,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorWebView.swift",
       "kind": "IntegerLiteral",
-      "offset": 2154,
+      "offset": 2236,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorWebView.swift",
       "kind": "StringLiteral",
-      "offset": 2217,
+      "offset": 2299,
       "length": 9,
       "value": "\"WebView\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorWebView.swift",
       "kind": "StringLiteral",
-      "offset": 2496,
+      "offset": 2578,
       "length": 29,
       "value": "\"https:\/\/www.bravesoft.co.jp\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorDialogView.swift",
       "kind": "BooleanLiteral",
-      "offset": 2771,
+      "offset": 2873,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorDialogView.swift",
       "kind": "IntegerLiteral",
-      "offset": 2996,
+      "offset": 3098,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorDialogView.swift",
       "kind": "StringLiteral",
-      "offset": 3067,
+      "offset": 3169,
       "length": 9,
       "value": "\"WebView\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorDialogView.swift",
       "kind": "StringLiteral",
-      "offset": 3157,
+      "offset": 3259,
       "length": 113,
       "value": "\"https:\/\/images.pexels.com\/photos\/1459505\/pexels-photo-1459505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorDialogView.swift",
       "kind": "StringLiteral",
-      "offset": 3346,
+      "offset": 3448,
       "length": 15,
       "value": "\"Button Action\""
     },
@@ -11026,20 +11050,6 @@
       "offset": 1591,
       "length": 2,
       "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Enviroment.swift",
-      "kind": "StringLiteral",
-      "offset": 180,
-      "length": 10,
-      "value": "\"BASE_URL\""
-    },
-    {
-      "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Enviroment.swift",
-      "kind": "StringLiteral",
-      "offset": 411,
-      "length": 20,
-      "value": "\"BASE_URL not found\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorCustomAlertView.swift",
@@ -11156,77 +11166,77 @@
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Utils\/AppvisorUtil.swift",
       "kind": "StringLiteral",
-      "offset": 253,
+      "offset": 270,
       "length": 21,
       "value": "\"appvisorinstalluuid\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Utils\/AppvisorUtil.swift",
       "kind": "StringLiteral",
-      "offset": 309,
+      "offset": 326,
       "length": 18,
       "value": "\"appvisorpushuuid\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Utils\/AppvisorUtil.swift",
       "kind": "BooleanLiteral",
-      "offset": 355,
+      "offset": 372,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Utils\/AppvisorUtil.swift",
       "kind": "BooleanLiteral",
-      "offset": 395,
+      "offset": 412,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/Core\/Appvisor.swift",
       "kind": "StringLiteral",
-      "offset": 743,
+      "offset": 725,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/Core\/Appvisor.swift",
       "kind": "StringLiteral",
-      "offset": 983,
+      "offset": 966,
       "length": 9,
       "value": "\"OpenWeb\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/Core\/Appvisor.swift",
       "kind": "StringLiteral",
-      "offset": 1035,
+      "offset": 1018,
       "length": 8,
       "value": "\"Cancel\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/Core\/Appvisor.swift",
       "kind": "StringLiteral",
-      "offset": 1085,
+      "offset": 1068,
       "length": 26,
       "value": "\"AppvisorRichPushCategory\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/Core\/Appvisor.swift",
       "kind": "StringLiteral",
-      "offset": 1155,
+      "offset": 1138,
       "length": 31,
       "value": "\"AppvisorRichPushMovieCategory\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/Core\/Appvisor.swift",
       "kind": "StringLiteral",
-      "offset": 1230,
+      "offset": 1213,
       "length": 31,
       "value": "\"AppvisorRichPushImageCategory\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/Core\/Appvisor.swift",
       "kind": "BooleanLiteral",
-      "offset": 18885,
+      "offset": 19642,
       "length": 5,
       "value": "false"
     },
@@ -11254,35 +11264,35 @@
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorOverlayView.swift",
       "kind": "BooleanLiteral",
-      "offset": 1999,
+      "offset": 2112,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorOverlayView.swift",
       "kind": "IntegerLiteral",
-      "offset": 2215,
+      "offset": 2327,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorOverlayView.swift",
       "kind": "StringLiteral",
-      "offset": 2282,
+      "offset": 2394,
       "length": 9,
       "value": "\"WebView\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorOverlayView.swift",
       "kind": "StringLiteral",
-      "offset": 2368,
+      "offset": 2480,
       "length": 113,
       "value": "\"https:\/\/images.pexels.com\/photos\/1459505\/pexels-photo-1459505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Views\/AppvisorOverlayView.swift",
       "kind": "StringLiteral",
-      "offset": 2553,
+      "offset": 2665,
       "length": 15,
       "value": "\"Button Action\""
     },
@@ -11290,405 +11300,405 @@
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
       "offset": 159,
-      "length": 9,
-      "value": "\"2.1.4.3\""
+      "length": 7,
+      "value": "\"2.1.5\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 196,
+      "offset": 194,
       "length": 20,
       "value": "\"appvisorpushstatus\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 243,
+      "offset": 241,
       "length": 19,
       "value": "\"appvisorpushtoken\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 291,
+      "offset": 289,
       "length": 18,
       "value": "\"appvisorpushtext\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 339,
+      "offset": 337,
       "length": 19,
       "value": "\"appvisorpushbadge\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 388,
+      "offset": 386,
       "length": 19,
       "value": "\"appvisorpushsound\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 427,
+      "offset": 425,
       "length": 16,
       "value": "\"appvisoroptout\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 475,
+      "offset": 473,
       "length": 24,
       "value": "\"appvisoroptreactivated\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 524,
+      "offset": 522,
       "length": 18,
       "value": "\"appvisorproperty\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 567,
+      "offset": 565,
       "length": 27,
       "value": "\":\/\/prod-api.app-visor.com\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 621,
+      "offset": 619,
       "length": 24,
       "value": "\"appvisorpushAuthorized\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 672,
+      "offset": 670,
       "length": 24,
       "value": "\"appvisorpushRegistered\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 720,
+      "offset": 718,
       "length": 21,
       "value": "\"appvisorpushGranted\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 766,
+      "offset": 764,
       "length": 7,
       "value": "\"{[s]}\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 801,
+      "offset": 799,
       "length": 35,
       "value": "\"Nj5mCb\\zNlc}7)h5hP6a\\7TaC0{@SY+\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 878,
+      "offset": 876,
       "length": 4,
-      "value": "12.0"
+      "value": "15.0"
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 910,
+      "offset": 908,
       "length": 4,
       "value": "\"id\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 949,
+      "offset": 947,
       "length": 16,
       "value": "\"propertyIDList\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 987,
+      "offset": 985,
       "length": 8,
       "value": "\"appKey\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1018,
+      "offset": 1016,
       "length": 4,
       "value": "\"id\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1047,
+      "offset": 1045,
       "length": 12,
       "value": "\"deviceUUID\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1085,
+      "offset": 1083,
       "length": 13,
       "value": "\"deviceToken\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1123,
+      "offset": 1121,
       "length": 12,
       "value": "\"appVersion\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1163,
+      "offset": 1161,
       "length": 15,
       "value": "\"localeCountry\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1207,
+      "offset": 1205,
       "length": 16,
       "value": "\"localeLanguage\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1248,
+      "offset": 1246,
       "length": 12,
       "value": "\"sdkVersion\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1281,
+      "offset": 1279,
       "length": 8,
       "value": "\"osType\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1314,
+      "offset": 1312,
       "length": 12,
       "value": "\"deviceType\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1352,
+      "offset": 1350,
       "length": 13,
       "value": "\"deviceModel\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1389,
+      "offset": 1387,
       "length": 11,
       "value": "\"OSVersion\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1421,
+      "offset": 1419,
       "length": 8,
       "value": "\"pushID\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1453,
+      "offset": 1451,
       "length": 11,
       "value": "\"messageID\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1489,
+      "offset": 1487,
       "length": 12,
       "value": "\"pushStatus\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1523,
+      "offset": 1521,
       "length": 9,
       "value": "\"envType\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1554,
+      "offset": 1552,
       "length": 9,
       "value": "\"lastKey\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1589,
+      "offset": 1587,
       "length": 13,
       "value": "\"arrivedTime\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1628,
+      "offset": 1626,
       "length": 12,
       "value": "\"isTokenReg\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1669,
+      "offset": 1667,
       "length": 15,
       "value": "\"server_status\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1709,
+      "offset": 1707,
       "length": 13,
       "value": "\"push_status\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1747,
+      "offset": 1745,
       "length": 4,
       "value": "\"pp\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1780,
+      "offset": 1778,
       "length": 5,
       "value": "\"ofs\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1813,
+      "offset": 1811,
       "length": 5,
       "value": "\"cnt\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1842,
+      "offset": 1840,
       "length": 4,
       "value": "\"dt\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1874,
+      "offset": 1872,
       "length": 4,
       "value": "\"OK\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1905,
+      "offset": 1903,
       "length": 4,
       "value": "\"NG\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 1935,
+      "offset": 1933,
       "length": 4,
       "value": "\"KL\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2000,
+      "offset": 1998,
       "length": 16,
       "value": "\"\/v1\/sdk\/regist\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2045,
+      "offset": 2043,
       "length": 18,
       "value": "\"\/v1\/sdk\/callback\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2094,
+      "offset": 2092,
       "length": 26,
       "value": "\"\/v1\/sdk\/changePushStatus\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2148,
+      "offset": 2146,
       "length": 27,
       "value": "\"\/v1\/sdk\/changeDeviceToken\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2213,
+      "offset": 2211,
       "length": 22,
       "value": "\"\/v1\/sdk\/setParameter\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2268,
+      "offset": 2266,
       "length": 22,
       "value": "\"\/v1\/sdk\/forcedUpdate\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2323,
+      "offset": 2321,
       "length": 21,
       "value": "\"\/v1\/sdk\/storeReview\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2371,
+      "offset": 2369,
       "length": 20,
       "value": "\"\/v1\/sdk\/getNotices\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2423,
+      "offset": 2421,
       "length": 23,
       "value": "\"\/v1\/sdk\/setNoticeRead\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2473,
+      "offset": 2471,
       "length": 19,
       "value": "\"\/v1\/sdk\/getConfig\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2529,
+      "offset": 2527,
       "length": 25,
       "value": "\"\/v1\/sdk\/getInAppMessage\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/AppvisorDefines.swift",
       "kind": "StringLiteral",
-      "offset": 2593,
+      "offset": 2591,
       "length": 22,
       "value": "\"\/v1\/sdk\/forcedUpdate\""
     },
@@ -11786,28 +11796,28 @@
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Utils\/AppvisorNetworkService.swift",
       "kind": "StringLiteral",
-      "offset": 2041,
+      "offset": 2197,
       "length": 5,
       "value": "\"GET\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Utils\/AppvisorNetworkService.swift",
       "kind": "StringLiteral",
-      "offset": 2063,
+      "offset": 2219,
       "length": 6,
       "value": "\"POST\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Utils\/AppvisorNetworkService.swift",
       "kind": "StringLiteral",
-      "offset": 2087,
+      "offset": 2243,
       "length": 7,
       "value": "\"PATCH\""
     },
     {
       "filePath": "\/Users\/bskannowataru\/Appvisor-iOS-SDK\/AppVisorSDK\/SupportCoreFiles\/Utils\/AppvisorNetworkService.swift",
       "kind": "StringLiteral",
-      "offset": 2113,
+      "offset": 2269,
       "length": 8,
       "value": "\"DELETE\""
     }

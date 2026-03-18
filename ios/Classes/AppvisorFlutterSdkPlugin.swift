@@ -5,7 +5,7 @@ import AppVisorSDK
 let avp = Appvisor.sharedInstance
 fileprivate let tag = "AppvisorFlutterPlugin"
 
-public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin {
+public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin, FlutterSceneLifeCycleDelegate {
     private let userDefaults = UserDefaults.standard
 
     let notifStream: NotificationStream
@@ -28,6 +28,7 @@ public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin {
         let instance = AppvisorFlutterSdkPlugin(notifStream: notifStream, channel: channel)
 
         registrar.addApplicationDelegate(instance)
+        registrar.addSceneDelegate(instance)
         registrar.addMethodCallDelegate(instance, channel: channel)
 
         log(tag, "Registeration is finished.")
@@ -92,6 +93,18 @@ public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin {
         // But since it doesn't any returns anything, there's no way to know if the user has granted the permission or not.
 
         avp.enablePush(with: appKey, isDebug: enableLogs)
+        // Directly call registerUserData at initialization because the SDK registers UIScene.willEnterForegroundNotification too late
+        avp.registerUserData { registerResult in
+            if registerResult.isSuccess {
+                log(tag, "registerUserData successfully")
+            } else {
+                if let error = registerResult.error {
+                    log(tag, "registerUserData failed: \(error)")
+                } else {
+                    log(tag, "registerUserData failed: unknown error")
+                }
+            }
+        }
         return result(nil)
     }
 
@@ -287,11 +300,11 @@ public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin {
         }
     }
 
-    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any] = [:]) -> Bool {
-        let userInfo = launchOptions[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: Any]
-        let center = UNUserNotificationCenter.current()
-        center.delegate = self
-        avp.trackPush(with: userInfo)
+    public func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
 
@@ -315,7 +328,7 @@ public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin {
         })
     }
 
-    public func applicationWillEnterForeground(_ application: UIApplication) {
+    public func sceneWillEnterForeground(_ scene: UIScene) {
         avp.clearBadgeNumber()
     }
 
