@@ -2,6 +2,7 @@ import 'package:appvisor_flutter_sdk/notice_list.dart';
 import 'package:appvisor_flutter_sdk/notification_data.dart';
 import 'package:appvisor_flutter_sdk/result.dart';
 import 'package:appvisor_flutter_sdk/update_data.dart';
+import 'package:appvisor_flutter_sdk/in_app_message.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'appvisor_flutter_sdk_impl.dart';
@@ -46,12 +47,12 @@ abstract class AppvisorFlutterSdkPlatform extends PlatformInterface {
 
   Future<Result<Null>> configure(
       String channelName,
-      String channelDescription,
+      String? channelDescription,
       String smallIconName,
       String? largeIconName,
       String defaultTitle,
       [int? richPushDialogWidth, int? richPushDialogHeight]) {
-    throw UnimplementedError('setupNotification() has not been implemented.');
+    throw UnimplementedError('configure() has not been implemented.');
   }
 
   Future<Result<Map<String, dynamic>>> testNotificationSetup() async {
@@ -79,8 +80,8 @@ abstract class AppvisorFlutterSdkPlatform extends PlatformInterface {
 
   Future<Result<UpdateData?>> checkForUpdate(
       {bool? useSDKDialog,
-      Function? onDismiss,
-      Function? onNavigationToStore}) async {
+      void Function()? onDismiss,
+      void Function()? onNavigationToStore}) async {
     throw UnimplementedError('checkForUpdates() has not been implemented.');
   }
 
@@ -98,5 +99,15 @@ abstract class AppvisorFlutterSdkPlatform extends PlatformInterface {
 
   Future<Result<Null>> markNoticeAsRead(int messageId) async {
     throw UnimplementedError('markNoticeAsRead() has not been implemented.');
+  }
+
+  /// Fetches and displays an in-app message using the native SDK.
+  ///
+  /// See [AppvisorFlutterSdk.getInAppMessage] for public API behavior.
+  Future<Result<InAppMessageData?>> getInAppMessage({
+    String? id,
+    void Function(String action)? onButtonTap,
+  }) async {
+    throw UnimplementedError('getInAppMessage() has not been implemented.');
   }
 }

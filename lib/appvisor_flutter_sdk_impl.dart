@@ -5,6 +5,7 @@ import 'package:appvisor_flutter_sdk/platform_method.dart';
 import 'package:appvisor_flutter_sdk/flutter_callback.dart';
 import 'package:appvisor_flutter_sdk/result.dart';
 import 'package:appvisor_flutter_sdk/update_data.dart';
+import 'package:appvisor_flutter_sdk/in_app_message.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'appvisor_flutter_sdk_platform_interface.dart';
@@ -15,6 +16,31 @@ class AppvisorFlutterSdkImpl extends AppvisorFlutterSdkPlatform {
   final _methodChannel = const MethodChannel('appvisor_flutter_sdk');
   final _notificationEventChannel =
       const EventChannel('appvisor_flutter_sdk/notification');
+  void Function()? _onUpdateDismiss;
+  void Function()? _onUpdateNavigationToStore;
+  void Function(String action)? _onInAppMessageButtonTap;
+  static bool _isInitialized = false;
+
+  AppvisorFlutterSdkImpl() {
+    _methodChannel.setMethodCallHandler(_handleNativeCallback);
+  }
+
+  Future<void> _handleNativeCallback(MethodCall call) async {
+    if (call.method == FlutterCallback.UpdateDialogOnDismiss.name) {
+      final callback = _onUpdateDismiss;
+      _onUpdateDismiss = null;
+      callback?.call();
+    }
+    if (call.method == FlutterCallback.UpdateDialogOnNavigationToStore.name) {
+      final callback = _onUpdateNavigationToStore;
+      _onUpdateNavigationToStore = null;
+      callback?.call();
+    }
+    if (call.method == FlutterCallback.InAppMessageOnButtonTap.name) {
+      final action = call.arguments;
+      _onInAppMessageButtonTap?.call(action is String ? action : '');
+    }
+  }
 
   @override
   Future<String?> get deviceId async {
@@ -48,8 +74,10 @@ class AppvisorFlutterSdkImpl extends AppvisorFlutterSdkPlatform {
         'appKey': appKey,
         'enableLogs': enableLogs,
       });
+      _isInitialized = true;
       return Result.success(null);
     } on PlatformException catch (e) {
+      _isInitialized = false;
       return Result.failure(e);
     }
   }
@@ -57,7 +85,7 @@ class AppvisorFlutterSdkImpl extends AppvisorFlutterSdkPlatform {
   @override
   Future<Result<Null>> configure(
       String channelName,
-      String channelDescription,
+      String? channelDescription,
       String smallIconName,
       String? largeIconName,
       String defaultTitle,
@@ -147,19 +175,11 @@ class AppvisorFlutterSdkImpl extends AppvisorFlutterSdkPlatform {
   @override
   Future<Result<UpdateData?>> checkForUpdate(
       {bool? useSDKDialog,
-      Function? onDismiss,
-      Function? onNavigationToStore}) async {
+      void Function()? onDismiss,
+      void Function()? onNavigationToStore}) async {
     try {
-      _methodChannel.setMethodCallHandler((call) async {
-        print(call.method);
-        if (call.method == FlutterCallback.UpdateDialogOnDismiss.name) {
-          onDismiss?.call();
-        }
-        if (call.method ==
-            FlutterCallback.UpdateDialogOnNavigationToStore.name) {
-          onNavigationToStore?.call();
-        }
-      });
+      _onUpdateDismiss = onDismiss;
+      _onUpdateNavigationToStore = onNavigationToStore;
 
       final result = await _methodChannel.invokeMethod<Map<Object?, Object?>>(
           PlatformMethod.CheckForUpdate.name, <String, dynamic>{
@@ -221,6 +241,36 @@ class AppvisorFlutterSdkImpl extends AppvisorFlutterSdkPlatform {
         'messageId': messageId,
       });
       return Result.success(null);
+    } on PlatformException catch (e) {
+      return Result.failure(e);
+    }
+  }
+
+  @override
+  Future<Result<InAppMessageData?>> getInAppMessage({
+    String? id,
+    void Function(String action)? onButtonTap,
+  }) async {
+    if (!_isInitialized) {
+      return Result.failure(PlatformException(
+        code: 'NotInitialized',
+        message:
+            'Appvisor SDK is not initialized. Call init() before getInAppMessage().',
+      ));
+    }
+    try {
+      _onInAppMessageButtonTap = onButtonTap;
+      final response = await _methodChannel.invokeMethod<Map<Object?, Object?>>(
+          PlatformMethod.GetInAppMessage.name, <String, dynamic>{'id': id});
+      if (response == null) {
+        return Result.success(null);
+      }
+      final map = Map<String, dynamic>.from(response);
+      final result = InAppMessageData.fromMap(map);
+      if (result.status != InAppMessageStatus.shown) {
+        return Result.success(null);
+      }
+      return Result.success(result);
     } on PlatformException catch (e) {
       return Result.failure(e);
     }

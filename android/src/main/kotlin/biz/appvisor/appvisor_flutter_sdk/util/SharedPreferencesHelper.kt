@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import biz.appvisor.appvisor_flutter_sdk.model.Configurations
 import androidx.core.content.edit
+import org.json.JSONObject
 
 private const val notificationSetupInfo = "notification_setup_info"
 internal class SharedPreferencesHelper(context: Context) {
@@ -13,21 +14,23 @@ internal class SharedPreferencesHelper(context: Context) {
     @SuppressLint("ApplySharedPref")
     fun setConfigurations(notification: Configurations) {
         prefs.edit(commit = true) {
-            val notificationMap = notification.toMap()
-            val notificationString =
-                notificationMap.entries.joinToString(separator = "|") { "${it.key}=${it.value}" }
-            putString(notificationSetupInfo, notificationString)
+            val json = JSONObject()
+            notification.toMap().forEach { (key, value) ->
+                if (value != null) {
+                    json.put(key, value)
+                }
+            }
+            putString(notificationSetupInfo, json.toString())
         }
     }
 
     fun getConfigurations(): Configurations? {
-        val str = prefs.getString(notificationSetupInfo, "") ?: return null
+        val str = prefs.getString(notificationSetupInfo, null) ?: return null
+        if (str.isEmpty()) return null
         val map = runCatching {
-            str.split("|").associate {
-                val (key, value) = it.split("=")
-                key to value
-            }
+            val json = JSONObject(str)
+            json.keys().asSequence().associateWith { json.getString(it) }
         }.getOrNull() ?: return null
-        return Configurations.fromMap(map)
+        return runCatching { Configurations.fromMap(map) }.getOrNull()
     }
 }

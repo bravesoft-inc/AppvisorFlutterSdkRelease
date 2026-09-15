@@ -8,4 +8,5 @@
 enum FlutterCallback: String {
     case UpdateDialogOnDismiss
     case UpdateDialogOnNavigationToStore
+    case InAppMessageOnButtonTap
 }

@@ -15,4 +15,5 @@ enum class PlatformMethod {
     GetConfig,
     GetNotices,
     MarkNoticeAsRead,
+    GetInAppMessage,
 }
