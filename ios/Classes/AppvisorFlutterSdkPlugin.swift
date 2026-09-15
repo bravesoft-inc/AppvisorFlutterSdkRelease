@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import SwiftUI
 import AppVisorSDK
 
 let avp = Appvisor.sharedInstance
@@ -66,6 +67,8 @@ public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin, FlutterSceneLife
             handleCheckForUpdate(call, result)
         case .MarkNoticeAsRead:
             handleMarkNoticeAsRead(call, result)
+        case .GetInAppMessage:
+            handleGetInAppMessage(call, result)
         default:
             result(FlutterMethodNotImplemented)
         }
@@ -300,6 +303,66 @@ public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin, FlutterSceneLife
         }
     }
 
+    private func handleGetInAppMessage(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        let args = call.arguments as? [String: Any]
+        let id = (args?["id"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+
+        avp.inAppMessage.fetchInAppMessage(with: id) { fetchResult in
+            switch fetchResult {
+            case .success(let message):
+                guard message.data != nil else {
+                    result(["status": "NOT_FOUND"])
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    if self.presentInAppMessage(message) {
+                        result(["status": "SHOWN"])
+                    } else {
+                        result(FlutterError(
+                            code: "InAppMessagePresentationFailed",
+                            message: "Failed to present in-app message.",
+                            details: nil)
+                        )
+                    }
+                }
+            case .failure(let error):
+                result(FlutterError(
+                    code: AvpError.Unknown.rawValue,
+                    message: error.localizedDescription,
+                    details: nil)
+                )
+            }
+        }
+    }
+
+    private func presentInAppMessage(_ message: InAppMessageResponse) -> Bool {
+        guard let rootViewController = getRootViewController() else {
+            log(tag, "Failed to get root view controller")
+            return false
+        }
+
+        var topViewController = rootViewController
+        while let presentedViewController = topViewController.presentedViewController {
+            topViewController = presentedViewController
+        }
+
+        let view = InAppMessageHostView(message: message, onDismiss: { [weak topViewController] in
+            topViewController?.dismiss(animated: false)
+        }) { [weak self, weak topViewController] in
+            topViewController?.dismiss(animated: false)
+            self?.channel.invokeMethod(
+                FlutterCallback.InAppMessageOnButtonTap.rawValue,
+                arguments: message.data?.action
+            )
+        }
+        let hostingController = UIHostingController(rootView: view)
+        hostingController.modalPresentationStyle = .overFullScreen
+        hostingController.view.backgroundColor = .clear
+        topViewController.present(hostingController, animated: false)
+        return true
+    }
+
     public func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
@@ -424,5 +487,35 @@ public class AppvisorFlutterSdkPlugin: NSObject, FlutterPlugin, FlutterSceneLife
 
     public func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         log(tag, "Error in registration. Error: \(error)")
+    }
+}
+
+private struct InAppMessageHostView: View {
+    let message: InAppMessageResponse
+    let onDismiss: () -> Void
+    let action: () -> Void
+    @State private var isVisible = true
+
+    var body: some View {
+        if isVisible {
+            ZStack {
+                Color.black.opacity(0.001)
+                    .ignoresSafeArea()
+
+                Appvisor.sharedInstance.inAppMessage.showInAppMessage(
+                    with: message,
+                    and: Binding(
+                        get: { isVisible },
+                        set: {
+                            isVisible = $0
+                            if !$0 {
+                                onDismiss()
+                            }
+                        }
+                    ),
+                    and: action
+                )
+            }
+        }
     }
 }

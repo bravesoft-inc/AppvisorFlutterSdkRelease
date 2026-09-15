@@ -14,14 +14,14 @@ This repository contains the source code for the Appvisor Push Flutter SDK.
     - [iOS Setup](#ios-setup)
     - [Android Setup](#android-setup)
     - [Create an instance of the SDK](#create-an-instance-of-the-sdk)
-    - [Configuration](#configuration)
+    - [Configuration (Android Only)](#configuration-android-only)
     - [Initialization](#initialization)
     - [Custom Properties](#custom-properties)
-    - [Configuration (Mandatory for Android; Android Only)](#configuration-mandatory-for-android-android-only)
     - [Notices](#notices)
     - [Notification Data](#notification-data)
     - [Checking for Updates (強制アップデート)](#checking-for-updates-強制アップデート)
     - [Requesting a Store Review](#requesting-a-store-review)
+    - [Popup Message](#popup-message)
     - [Rich Push Notifications](#rich-push-notifications)
     - [Create a Notification Service Extension](#create-a-notification-service-extension)
     - [Create Notification Content Extensions](#create-notification-content-extensions)
@@ -60,32 +60,6 @@ Follow these steps to set up the Android environment:
   > :warning: **Important Note:**
   > During development, version 4.4.x of the Firebase Android SDK was found to have some known issues (see [this GitHub issue](https://github.com/firebase/firebase-android-sdk/issues/4693) for details). As a result, version 4.3.15 was used in the example app. If you encounter any issues with version 4.4.x, consider switching to version 4.3.15.
 
-3. **Update `android/settings.gradle` File:** Add the following to your `android/settings.gradle` file:
-
-```gradle
-
-include ":app"
-
-def flutterProjectRoot = rootProject.projectDir.parentFile.toPath()
-
-def plugins = new Properties()
-def pluginsFile = new File(flutterProjectRoot.toFile(), '.flutter-plugins')
-if (pluginsFile.exists()) {
-    pluginsFile.withInputStream { stream -> plugins.load(stream) }
-}
-
-plugins.each { name, path ->
-    def pluginDirectory = flutterProjectRoot.resolve(path).resolve('android').toFile()
-    def settings = flutterProjectRoot.resolve(path).resolve('android/settings.gradle').toFile()
-    include ":$name"
-    project(":$name").projectDir = pluginDirectory
-
-    if (settings.exists()) {
-        apply from: settings
-    }
-}
-``` 
-
 ### Create an instance of the SDK
 
 To use the SDK in your application, you first need to create an instance of it. Here's how you can do that:
@@ -105,21 +79,29 @@ You need to add your icon files to the `android/app/src/main/res/drawable` direc
 Once you've added your icon files, configure using the `configure` method of the SDK. Here's an example:
 
 ```dart
-sdk.configure(
-  // The name of the notification channel for Android. This is mandatory.
-  channelName: 'Appvisor',
-  
-  // The description of the notification channel for Android. This is mandatory.
-  channelDescription: 'Appvisor Push notifications',
-  
-  // The name of the small icon file that you added to the `android/app/src/main/res/drawable` directory. This is mandatory.
+final result = await sdk.configure(
+  // The name of the small icon file that you added to the `android/app/src/main/res/drawable` directory. Required.
   // example: android/app/src/main/res/drawable/ic_notification.xml
-  smallIcon: 'ic_notification', 
-  
-  // The name of the large icon file that you added to the `android/app/src/main/res/drawable` directory. This is optional and needs to be a bitmap image.
+  smallIconName: 'ic_notification',
+
+  // Default notification title used when the push payload omits one. Required.
+  defaultTitle: 'Appvisor',
+
+  // The name of the notification channel for Android. Required.
+  // On Android 8.0+ the NotificationChannel cannot be created without this value,
+  // which means push notifications will be silently dropped by the OS.
+  channelName: 'Appvisor',
+
+  // The description of the notification channel for Android. Optional but recommended.
+  channelDescription: 'Appvisor Push notifications',
+
+  // The name of the large icon file that you added to the `android/app/src/main/res/drawable` directory. Optional and needs to be a bitmap image.
   // example: android/app/src/main/res/drawable/ic_notification_large.png
-  largeIcon: 'ic_notification_large', 
+  largeIconName: 'ic_notification_large',
 );
+if (!result.isSuccess) {
+  // Handle configuration failure (e.g. invalid icon name)
+}
 ``` 
 
 ### Initialization
@@ -355,6 +337,31 @@ sdk.requestAppReview();
 
 In this example, we're calling the `requestAppReview` method to prompt the user to review the app. Please note that the actual display of the review dialog is up to the operating system and may not always appear when this method is called.
 
+### Popup Message
+
+You can fetch and display a popup message using the `getInAppMessage` method.
+
+If `id` is provided, that message is fetched. If `id` is omitted, the latest eligible message is fetched. When the user taps the action button, `onButtonTap` receives the action string. The SDK does not navigate automatically.
+
+```dart
+final result = await sdk.getInAppMessage(
+  id: '1',
+  onButtonTap: (action) {
+    print('Button action: $action');
+  },
+);
+
+result.onSuccess((message) {
+  print("Status: ${message?.status.value ?? 'No message'}");
+});
+
+result.onFailure((error) {
+  print('Failed to get popup message: ${error.message}');
+});
+```
+
+Returns `InAppMessageData` when a message is shown. Returns `null` when no message is shown, including expired, unpublished, and not found results.
+
 ### Rich Push Notifications
 
 This setup is only required for iOS. Android does not require any additional setup for rich push notifications. 
@@ -507,7 +514,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 | `deviceId` | A unique identifier for the device. | None | Future<String?> |
 | `isPushEnabled` | Checks if push is enabled. | None | Future\<bool\> |
 | `init(appKey, [enableLogs])` | Initializes the SDK. | `appKey`: String, `enableLogs`: bool? | Future<Result<Null>> |
-| `configure(channelName, channelDescription, smallIconName, [largeIconName, defaultTitle])` | Configures the SDK with options. | `channelName`: String, `channelDescription`: String, `smallIconName`: String, `largeIconName`: String?, `defaultTitle`: String? | Future<Result<Null>> |
+| `configure({required String channelName, String? channelDescription, required String smallIconName, String? largeIconName, required String defaultTitle, int? richPushDialogWidth, int? richPushDialogHeight})` | Configures the SDK with options. | `channelName`: String, `channelDescription`: String?, `smallIconName`: String, `largeIconName`: String?, `defaultTitle`: String, `richPushDialogWidth`: int?, `richPushDialogHeight`: int? | Future<Result<Null>> |
 | `togglePush(enable)` | Enables or disables push notifications. | `enable`: bool | Future<Result<bool>> |
 | `getCustomProperty(parameterId)` | Retrieves a custom property. | `parameterId`: int | Future\<String?\> |
 | `setCustomProperty({required parameterId, value})` | Sets a custom property. | `parameterId`: int, `value`: String? | Future\<bool\> |
@@ -517,4 +524,5 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 | `getConfig()` | Retrieves the configuration. | None | Future<Result<Map<String, dynamic>>> |
 | `getNotices([lastKey])` | Retrieves the notices. | `lastKey`: LastKey? | Future<Result<NoticeList?>> |
 | `markNoticeAsRead(messageId)` | Marks a notice as read. | `messageId`: int | Future<Result<Null>> |
+| `getInAppMessage({id, onButtonTap})` | Fetches and displays a popup message. | `id`: String?, `onButtonTap`: void Function(String action)? | Future<Result<InAppMessageData?>> |
 | `notificationData` | A stream that emits the data from a notification whenever one is received. | None | Stream\<NotificationData\>

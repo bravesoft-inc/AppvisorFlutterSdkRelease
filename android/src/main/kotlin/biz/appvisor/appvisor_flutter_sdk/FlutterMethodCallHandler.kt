@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import biz.appvisor.android.sdk.Appvisor
 import biz.appvisor.android.sdk.AppvisorConfigurations
+import biz.appvisor.android.sdk.InAppMessageStatus
 import biz.appvisor.appvisor_flutter_sdk.AppvisorError.CheckForUpdateFailed
 import biz.appvisor.appvisor_flutter_sdk.AppvisorError.InvalidLargeIconName
 import biz.appvisor.appvisor_flutter_sdk.AppvisorError.InvalidSmallIconName
@@ -14,6 +15,7 @@ import biz.appvisor.appvisor_flutter_sdk.PlatformMethod.Configure
 import biz.appvisor.appvisor_flutter_sdk.PlatformMethod.GetConfig
 import biz.appvisor.appvisor_flutter_sdk.PlatformMethod.GetCustomProperty
 import biz.appvisor.appvisor_flutter_sdk.PlatformMethod.GetDeviceId
+import biz.appvisor.appvisor_flutter_sdk.PlatformMethod.GetInAppMessage
 import biz.appvisor.appvisor_flutter_sdk.PlatformMethod.GetNotices
 import biz.appvisor.appvisor_flutter_sdk.PlatformMethod.Init
 import biz.appvisor.appvisor_flutter_sdk.PlatformMethod.IsPushEnabled
@@ -65,6 +67,7 @@ class FlutterMethodCallHandler : MethodCallHandler {
                 GetConfig -> getConfig(activityRef, result)
                 GetNotices -> getNotices(activityRef, call, result)
                 MarkNoticeAsRead -> markNoticeAsRead(activityRef, call, result)
+                GetInAppMessage -> getInAppMessage(activityRef, call, result)
                 null -> result.notImplemented()
             }
         } else {
@@ -299,6 +302,25 @@ class FlutterMethodCallHandler : MethodCallHandler {
             },
             onFailure = {
                 result.error(it.type, it.message, it.cause)
+            }
+        )
+    }
+
+    private fun getInAppMessage(activity: Activity, call: MethodCall, result: Result) {
+        val id = call.argument<String>("id")?.takeIf { it.isNotBlank() }
+        val appvisor = Appvisor.getInstance(activity)
+        appvisor.getInAppMessage(
+            activity = activity,
+            messageId = id,
+            placeHolderBitmap = null,
+            onClickAction = { action: String ->
+                channel?.invokeMethod(FlutterCallback.InAppMessageOnButtonTap.name, action)
+            },
+            onSuccess = { status: InAppMessageStatus ->
+                result.success(mapOf("status" to status.name))
+            },
+            onFailure = { error ->
+                result.error(error.type, error.message, error.cause)
             }
         )
     }

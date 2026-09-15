@@ -13,14 +13,14 @@
     - [iOS 設定](#ios-設定)
     - [Android 設定](#android-設定)
     - [SDKのインスタンスを作成する](#sdkのインスタンスを作成する)
-    - [Configuration](#configuration)
+    - [Configuration (Android の場合は必須、 iOS は不要)](#configuration-android-の場合は必須-ios-は不要)
     - [初期化](#初期化)
     - [カスタム プロパティの登録](#カスタム-プロパティの登録)
-    - [設定 (Android の場合は必須、 iOS は不要)](#設定-android-の場合は必須-ios-は不要)
     - [通知](#通知)
     - [Notification Data](#notification-data)
     - [Checking for Updates (強制アップデート)](#checking-for-updates-強制アップデート)
     - [ストアレビューをユーザにうながす](#ストアレビューをユーザにうながす)
+    - [ポップアップメッセージ](#ポップアップメッセージ)
     - [Rich Push Notifications](#rich-push-notifications)
     - [通知サービス拡張機能の作成](#通知サービス拡張機能の作成)
       - [通知コンテンツ拡張機能の作成](#通知コンテンツ拡張機能の作成)
@@ -57,31 +57,6 @@ Android 環境をセットアップするには、次の手順を実施してく
   > :warning: **重要な注意点:**  
   > 開発中に Firebase Android SDK バージョン 4.4.x にいくつかの問題があることが判明しました。 ( 詳細はこちらをご覧ください [this GitHub issue](https://github.com/firebase/firebase-android-sdk/issues/4693) ).  
   その対応として、サンプル アプリではバージョン 4.3.15 を使用しました。バージョン 4.4.x で問題が発生した場合は、バージョン 4.3.15 に切り替えることを検討してください。  
-1. **`android/settings.gradle` を更新します:**  
-  以下の内容を `android/settings.gradle` に追加してください。  
-  ```gradle
-
-  include ":app"
-
-  def flutterProjectRoot = rootProject.projectDir.parentFile.toPath()
-
-  def plugins = new Properties()
-  def pluginsFile = new File(flutterProjectRoot.toFile(), '.flutter-plugins')
-  if (pluginsFile.exists()) {
-      pluginsFile.withInputStream { stream -> plugins.load(stream) }
-  }
-
-  plugins.each { name, path ->
-      def pluginDirectory = flutterProjectRoot.resolve(path).resolve('android').toFile()
-      def settings = flutterProjectRoot.resolve(path).resolve('android/settings.gradle').toFile()
-      include ":$name"
-      project(":$name").projectDir = pluginDirectory
-
-      if (settings.exists()) {
-          apply from: settings
-      }
-  }
-  ``` 
 
 ### SDKのインスタンスを作成する
 
@@ -104,21 +79,29 @@ iOSではこちらの設定は必要ありません。
 アイコン ファイルを追加したら、SDK の `configure` メソッドを使用して設定します。 
 コード例:  
 ```dart
-sdk.configure(
-  // Android の通知チャネルの名前。これは必須です.
-  channelName: 'Appvisor',
-  
-  // Android の通知チャネルの説明。これは必須です。
-  channelDescription: 'Appvisor Push notifications',
-  
-  // `android/app/src/main/res/drawable` ディレクトリに追加した小アイコン ファイルの名前。これは必須です。
+final result = await sdk.configure(
+  // `android/app/src/main/res/drawable` ディレクトリに追加した小アイコン ファイルの名前。必須です。
   // example: android/app/src/main/res/drawable/ic_notification.xml
-  smallIcon: 'ic_notification', 
-  
+  smallIconName: 'ic_notification',
+
+  // プッシュ通知のペイロードにタイトルが含まれていない場合に使用される既定タイトル。必須です。
+  defaultTitle: 'Appvisor',
+
+  // Android の通知チャネルの名前。必須です。
+  // Android 8.0+ ではこの値が無いと NotificationChannel が生成されず、
+  // 通知が OS によって配信されません。
+  channelName: 'Appvisor',
+
+  // Android の通知チャネルの説明。任意ですが指定が推奨されます。
+  channelDescription: 'Appvisor Push notifications',
+
   // `android/app/src/main/res/drawable` ディレクトリに追加した大アイコン ファイルの名前。これはオプションです。ビットマップ イメージである必要があります。
   // example: android/app/src/main/res/drawable/ic_notification_large.png
-  largeIcon: 'ic_notification_large', 
+  largeIconName: 'ic_notification_large',
 );
+if (!result.isSuccess) {
+  // 設定失敗時の処理（例: アイコン名不正など）
+}
 ``` 
 
 ### 初期化
@@ -338,6 +321,31 @@ sdk.requestAppReview();
 この例では、`requestAppReview`メソッドを呼び出して、ユーザーにアプリのレビューを求めています。  
 レビュー ダイアログの実際の表示はオペレーティング システムによって異なり、このメソッドが呼び出されたときに常に表示されるとは限らないことに注意してください。  
 
+### ポップアップメッセージ
+
+`getInAppMessage` メソッドを使用して、ポップアップメッセージを取得して表示できます。
+
+`id` を指定した場合、指定したメッセージを取得します。`id` を省略した場合、表示対象の最新メッセージを取得します。ユーザーがアクションボタンをタップすると、`onButtonTap` にアクション文字列が渡されます。SDK は自動で画面遷移しません。
+
+```dart
+final result = await sdk.getInAppMessage(
+  id: '1',
+  onButtonTap: (action) {
+    print('Button action: $action');
+  },
+);
+
+result.onSuccess((message) {
+  print("Status: ${message?.status.value ?? 'メッセージなし'}");
+});
+
+result.onFailure((error) {
+  print('ポップアップメッセージの取得に失敗しました: ${error.message}');
+});
+```
+
+メッセージが表示された場合は `InAppMessageData` を返します。期限切れ、非公開、未検出などメッセージが表示されない場合は `null` を返します。
+
 ### Rich Push Notifications
 
 この設定は iOS の場合にのみ必要です。 Android では、リッチ プッシュ通知のために追加の設定は必要ありません。
@@ -491,7 +499,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 | `deviceId` | デバイスの識別子。 | None | Future<String?> |
 | `isPushEnabled` | プッシュが有効になっているかどうかを確認します。 | None | Future\<bool\> |
 | `init(appKey, [enableLogs])` | SDKを初期化します。 | `appKey`: String, `enableLogs`: bool? | Future<Result<Null>> |
-| `configure(channelName, channelDescription, smallIconName, [largeIconName, defaultTitle])` | オプションを使用して SDK を構成します。| `channelName`: String, `channelDescription`: String, `smallIconName`: String, `largeIconName`: String?, `defaultTitle`: String? | Future<Result<Null>> |
+| `configure({required String channelName, String? channelDescription, required String smallIconName, String? largeIconName, required String defaultTitle, int? richPushDialogWidth, int? richPushDialogHeight})` | オプションを使用して SDK を構成します。| `channelName`: String, `channelDescription`: String?, `smallIconName`: String, `largeIconName`: String?, `defaultTitle`: String, `richPushDialogWidth`: int?, `richPushDialogHeight`: int? | Future<Result<Null>> |
 | `togglePush(enable)` | プッシュ通知を有効または無効にします。 | `enable`: bool | Future<Result<bool>> |
 | `getCustomProperty(parameterId)` | カスタムプロパティを取得します。 | `parameterId`: int | Future\<String?\> |
 | `setCustomProperty({required parameterId, value})` | カスタムプロパティを設定します。 | `parameterId`: int, `value`: String? | Future\<bool\> |
@@ -501,4 +509,5 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 | `getConfig()` | 設定を取得します。 | None | Future<Result<Map<String, dynamic>>> |
 | `getNotices([lastKey])` | 通知を取得します。 | `lastKey`: LastKey? | Future<Result<NoticeList?>> |
 | `markNoticeAsRead(messageId)` | 通知を既読としてマークします。 | `messageId`: int | Future<Result<Null>> |
+| `getInAppMessage({id, onButtonTap})` | ポップアップメッセージを取得して表示します。 | `id`: String?, `onButtonTap`: void Function(String action)? | Future<Result<InAppMessageData?>> |
 | `notificationData` | 通知を受信するたびに通知からデータを出力するストリーム。| None | Stream\<NotificationData\>

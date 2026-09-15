@@ -19,4 +19,5 @@ enum PlatformMethod: String {
     case GetConfig
     case CheckForUpdate
     case MarkNoticeAsRead
+    case GetInAppMessage
 }

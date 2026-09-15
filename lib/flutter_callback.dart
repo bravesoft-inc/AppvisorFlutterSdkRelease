@@ -3,4 +3,5 @@
 enum FlutterCallback {
   UpdateDialogOnDismiss,
   UpdateDialogOnNavigationToStore,
+  InAppMessageOnButtonTap,
 }

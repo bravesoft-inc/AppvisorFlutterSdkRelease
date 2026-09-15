@@ -2,9 +2,12 @@ import 'package:appvisor_flutter_sdk/notice_list.dart';
 import 'package:appvisor_flutter_sdk/notification_data.dart';
 import 'package:appvisor_flutter_sdk/result.dart';
 import 'package:appvisor_flutter_sdk/update_data.dart';
+import 'package:appvisor_flutter_sdk/in_app_message.dart';
 import 'package:flutter/foundation.dart';
 
 import 'appvisor_flutter_sdk_platform_interface.dart';
+
+export 'in_app_message.dart';
 
 class AppvisorFlutterSdk {
   final platform = AppvisorFlutterSdkPlatform.instance;
@@ -49,8 +52,10 @@ class AppvisorFlutterSdk {
 
   /// Sets up options for push notifications (Android).
   ///
-  /// - [channelName]: Notification channel name (required).
-  /// - [channelDescription]: Notification channel description (required).
+  /// - [channelName]: Notification channel name (required). On Android 8.0+
+  ///   the `NotificationChannel` cannot be created without this value, which
+  ///   causes push notifications to be silently dropped by the OS.
+  /// - [channelDescription]: Notification channel description (optional).
   /// - [smallIconName]: Drawable resource name for the small icon, without extension (required).
   /// - [largeIconName]: Drawable resource name for the large icon, without extension (optional).
   /// - [defaultTitle]: Default notification title (required).
@@ -58,14 +63,29 @@ class AppvisorFlutterSdk {
   /// - [richPushDialogHeight]: Rich push dialog height in px (optional).
   ///
   /// Returns a [Future] with a [Result] containing [Null] on success.
+  ///
+  /// Throws an [ArgumentError] if any required string parameter is blank
+  /// (empty or whitespace only). This mirrors the native validation and
+  /// surfaces the cause earlier from the Dart layer.
   Future<Result<Null>> configure(
       {required String channelName,
-      required String channelDescription,
+      String? channelDescription,
       required String smallIconName,
       String? largeIconName,
       required String defaultTitle,
       int? richPushDialogWidth,
       int? richPushDialogHeight}) {
+    if (channelName.trim().isEmpty) {
+      throw ArgumentError.value(channelName, 'channelName', 'must not be blank');
+    }
+    if (smallIconName.trim().isEmpty) {
+      throw ArgumentError.value(
+          smallIconName, 'smallIconName', 'must not be blank');
+    }
+    if (defaultTitle.trim().isEmpty) {
+      throw ArgumentError.value(
+          defaultTitle, 'defaultTitle', 'must not be blank');
+    }
     return platform.configure(
         channelName,
         channelDescription,
@@ -120,8 +140,8 @@ class AppvisorFlutterSdk {
 
   Future<Result<UpdateData?>> checkForUpdates(
       {bool? useSDKDialog,
-      Function? onDismiss,
-      Function? onNavigationToStore}) {
+      void Function()? onDismiss,
+      void Function()? onNavigationToStore}) {
     return platform.checkForUpdate(
         useSDKDialog: useSDKDialog,
         onDismiss: onDismiss,
@@ -143,5 +163,23 @@ class AppvisorFlutterSdk {
 
   Future<Result<Null>> markNoticeAsRead(int messageId) async {
     return platform.markNoticeAsRead(messageId);
+  }
+
+  /// Fetches and displays an in-app message using the native SDK.
+  ///
+  /// If [id] is provided, the native SDK fetches that message. If [id] is
+  /// omitted, the native SDK fetches the latest eligible message.
+  ///
+  /// Returns [InAppMessageData] when the native SDK shows a message.
+  /// Returns `null` when no message is shown, including expired, unpublished,
+  /// and not found results.
+  ///
+  /// [onButtonTap] is called with the native action string when the user taps
+  /// the in-app message action button. The SDK does not navigate automatically.
+  Future<Result<InAppMessageData?>> getInAppMessage({
+    String? id,
+    void Function(String action)? onButtonTap,
+  }) {
+    return platform.getInAppMessage(id: id, onButtonTap: onButtonTap);
   }
 }
